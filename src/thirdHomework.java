@@ -14,32 +14,26 @@ public class thirdHomework {
         //Task 2
         int friday = 5;
         int daysOfWeek = 7;
-        for (int i = friday; i <= 31; i++){   //Another variant (int i = friday; i <= 31; i+=7)
-            if (i - friday == 0) {
-                System.out.println("Сегодня пятница, " + friday + "-е число. Необходимо подготовить отчет.");
-                friday = friday + daysOfWeek;
-            }
+        for (int i = friday; i <= 31; i+=7) {
+                System.out.println("Сегодня пятница, " + i + "-е число. Необходимо подготовить отчет.");
         }
         //Task 3
         int year = 2021;
         int previousYear = 2021-200;
         int futureYear = 2021+100;
-        for (int i = 0; i <= futureYear; i+=79){
-            if (i >= previousYear && i <= futureYear){
+        for (int i = previousYear; i <= futureYear; i+=79){
+            if (i % 79 == 0){
                 System.out.println(i);
             }
         }
         //Task 4, есть и другой вариант где мы выводим число только после проверки а не сразу
         for (int i = 0; i <= 30; i++) {
             System.out.print(i + ":");
-            if ((i % 3 == 0) && (i % 5 == 0)){
-                System.out.print("ping pong");
+            if (i % 3 == 0){
+                System.out.print(" ping");
             }
-            else if (i % 5 == 0) {
-                System.out.print("pong");
-            }
-            else if (i % 3 == 0){
-                System.out.print("ping");
+            if (i % 5 == 0) {
+                System.out.print(" pong");
             }
             System.out.println();
         }
