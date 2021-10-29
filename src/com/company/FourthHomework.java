@@ -12,26 +12,26 @@ public class FourthHomework {
         }
         return arr;
     }
-    private static final int[] arr = generateRandomArray();
 
     public static void main (String[] args) {
+        int[] arr = generateRandomArray();
         System.out.println(Arrays.toString(arr));
         //Task 1
         int amount = 0;
-        for (int i = 0; i < arr.length; i++) {
-            amount += arr[i];
+        for (int i : arr) {
+            amount += i;
         }
         System.out.println(amount);
 
         //Task 2
-        int min = 200_999;
-        int max = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < min){
-                min = arr[i];
+        int min = arr[0];
+        int max = arr[0];
+        for (int i : arr) {
+            if (i < min) {
+                min = i;
             }
-            if (arr[i] > max) {
-                max = arr[i];
+            if (i > max) {
+                max = i;
             }
         }
         System.out.printf("Максимальная сумма: %d, минимальная сумма: %d \n", max, min);
@@ -42,12 +42,10 @@ public class FourthHomework {
 
         //Task 4
         char[] reverseFullName = { 'n', 'a', 'v', 'I', ' ', 'v', 'o', 'n', 'a', 'v', 'I'};
-        for (int i = 0; i < reverseFullName.length/2; i++) {
-            char temp = reverseFullName[reverseFullName.length - 1 - i];
-            reverseFullName[reverseFullName.length - 1 - i] = reverseFullName[i];
-            reverseFullName[i] = temp;
+        for (int i = reverseFullName.length-1; i >= 0; i--) {
+            System.out.print(reverseFullName[i]);
         }
-        System.out.println(Arrays.toString(reverseFullName));
+        System.out.println();
 
         //Task 5
         int [][] matrix = new int[3][3];
@@ -55,9 +53,6 @@ public class FourthHomework {
             for (int j = 0; j < 3; j++) {
                 if (i == j || i + j + 1 == matrix.length) {
                     matrix[i][j] = 1;
-                }
-                else {
-                    matrix[i][j] = 0;
                 }
             }
         }
@@ -86,7 +81,6 @@ public class FourthHomework {
 
         //Task 8
         int [] mass = new int[] {-6, 2, 5, -8, 8, 10, 4, -7, 12, 1};
-        Arrays.sort(mass);
         int first = 0;
         int second =0;
         for (int i = 0; i < mass.length; i++) {
