@@ -1,21 +1,20 @@
 package com.company;
 
 public class Library {
-    private Book[] books;
+    private final Book[] books;
 
     public Library(int length) {
         books = new Book[length];
     }
 
 
-    public Book[] allOfBooks(Book book) {
+    public void allOfBooks(Book book) {
         for (int i = 0; i < books.length; i++) {
             if (books[i] == null) {
                 books[i] = book;
                 break;
             }
         }
-        return this.books;
     }
 
     public void printBooks() {

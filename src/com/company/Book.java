@@ -1,8 +1,8 @@
 package com.company;
 
 public class Book {
-    Author author;
-    private String bookName;
+    private final Author author;
+    private final String bookName;
     private int publishingYear;
 
     public Book(Author author, String bookName, int publishingYear) {
