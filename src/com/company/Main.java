@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Author author1 = new Author("Stephen", "King");
         Book book1 = new Book(author1, "IT", 1989);
-        System.out.println(book1.getAuthorName() + " " + book1.getAuthorSurname() + " " + book1.getPublishingYear());
+        System.out.println(book1.getAuthor().getName() + " " + book1.getAuthor().getSurName() + " " + book1.getPublishingYear());
         book1.setPublishingYear(1950);
         System.out.println(book1.getPublishingYear());
         Author author2 = new Author("Andzhey", "Sapkovskiy");
@@ -22,9 +22,9 @@ public class Main {
         library.addBook(book3);
         library.addBook(book4);
         library.printBooks();
-        library.information(book1.getBookName());
-        library.newPublishingYear(book4.getBookName(), 1998);
-        library.information(book4.getBookName());
+        library.printBookInfo(book1.getBookName());
+        library.changePublishingYear(book4.getBookName(), 1998);
+        library.printBookInfo(book4.getBookName());
 
 
     }

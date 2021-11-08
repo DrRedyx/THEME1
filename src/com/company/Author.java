@@ -11,11 +11,11 @@ public class Author {
 
     public String getName() {
 
-        return this.name;
+        return name;
     }
 
     public String getSurName() {
 
-        return this.surName;
+        return surName;
     }
 }

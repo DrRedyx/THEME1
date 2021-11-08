@@ -26,12 +26,8 @@ public class Book {
         this.publishingYear = publishingYear;
     }
 
-    public String getAuthorName() {
-        return author.getName();
-    }
-
-    public String getAuthorSurname() {
-        return author.getSurName();
+    public Author getAuthor() {
+        return author;
     }
 
 }
