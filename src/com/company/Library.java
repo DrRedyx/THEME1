@@ -1,44 +1,44 @@
 package com.company;
 
 public class Library {
-    private final Book[] books;
+    private final Book[] library;
 
     public Library(int length) {
-        books = new Book[length];
+        library = new Book[length];
     }
 
 
     public void addBook(Book book) {
-        int i;
-        for (i = 0; i < books.length; i++) {
-            if (books[i] == null) {
-                    books[i] = book;
+        int bookNumber;
+        for (bookNumber = 0; bookNumber < library.length; bookNumber++) {
+            if (library[bookNumber] == null) {
+                library[bookNumber] = book;
                     break;
             }
         }
-        if (i == books.length) {
+        if (bookNumber == library.length) {
             throw new RuntimeException("Библиотека переполнена, возьмите книгу назад.");
         }
     }
 
     public void printBooks() {
-        for (int i = 0; i < books.length; i++) {
-            System.out.println(books[i].getAuthor().getName() + " " + books[i].getAuthor().getSurName() + ":" + books[i].getBookName() + ":" + books[i].getPublishingYear());
+        for (int i = 0; i < library.length; i++) {
+            System.out.println(library[i].getAuthor().getName() + " " + library[i].getAuthor().getSurName() + ":" + library[i].getBookName() + ":" + library[i].getPublishingYear());
         }
     }
 
     public void printBookInfo(String bookName) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getBookName().equals(bookName)) {
-                System.out.println(books[i].getBookName() + " by " + books[i].getAuthor().getName() + " " + books[i].getAuthor().getSurName() + " was published in " + books[i].getPublishingYear());
+        for (int i = 0; i < library.length; i++) {
+            if (library[i].getBookName().equals(bookName)) {
+                System.out.println(library[i].getBookName() + " by " + library[i].getAuthor().getName() + " " + library[i].getAuthor().getSurName() + " was published in " + library[i].getPublishingYear());
             }
         }
     }
 
     public void changePublishingYear(String bookName, int newPublishingYear) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getBookName().equals(bookName)) {
-                books[i].setPublishingYear(newPublishingYear);
+        for (int i = 0; i < library.length; i++) {
+            if (library[i].getBookName().equals(bookName)) {
+                library[i].setPublishingYear(newPublishingYear);
             }
         }
     }
