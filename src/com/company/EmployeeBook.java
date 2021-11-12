@@ -7,7 +7,9 @@ public class EmployeeBook {
         employees = new Employee[length];
     }
 
-    public void addEmployee(Employee employee) {
+
+    public void addEmployee(String fullName, int department, int salary) {
+        Employee employee = new Employee(fullName, department, salary);
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
                 employees[i] = employee;
@@ -17,14 +19,14 @@ public class EmployeeBook {
         throw new RuntimeException("Штат сотрудников заполнен");
     }
 
-    public void deleteEmployee (int id, String fio) {
+    public void deleteEmployee (int id, String fullName) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getId() == id || employees[i].getFio().equals(fio)) {
+            if (employees[i].getId() == id || employees[i].getFullName().equals(fullName)) {
                 employees[i] = null;
                 System.out.println("Сотрудник уволен");
-            } else {
-                System.out.println("Сотрудника не существует");
+                return;
             }
+            System.out.println("Сотрудника не существует");
         }
     }
 
@@ -35,7 +37,7 @@ public class EmployeeBook {
         }
     }
 
-    public int findAllSalary() {
+    public int findTotalSalary() {
         int sum = 0;
         for (int i = 0; i < employees.length; i++) {
             sum += employees[i].getSalary();
@@ -44,77 +46,71 @@ public class EmployeeBook {
     }
 
     public void findMinSalary() {
-        int min = employees[1].getSalary();
-        String fio = null;
+        int min = employees[0].getSalary();
+        String fullName = null;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getSalary() < min) {
                 min = employees[i].getSalary();
-                fio = employees[i].getFio();
+                fullName = employees[i].getFullName();
             }
         }
-        System.out.println("Сотрудник с минимальной зарплатой: " + fio + ". Salary: " + min);
+        System.out.println("Сотрудник с минимальной зарплатой: " + fullName + ". Salary: " + min);
     }
 
     public void findMaxSalary() {
-        int max = employees[1].getSalary();
-        String fio = null;
+        int max = employees[0].getSalary();
+        String fullName = null;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getSalary() > max) {
                 max = employees[i].getSalary();
-                fio = employees[i].getFio();
+                fullName = employees[i].getFullName();
             }
         }
-        System.out.println("Сотрудник с самой высокой зарплатой: " + fio + ". Salary: " + max);
+        System.out.println("Сотрудник с самой высокой зарплатой: " + fullName + ". Salary: " + max);
     }
 
-    public void findAverageSalary() {
-        int sum = findAllSalary();
-        int average = sum/employees.length;
-        System.out.println("Average salary: " + average);
+    public double findAverageSalary() {
+        double sum = findTotalSalary();
+        return sum/employees.length;
     }
 
-    public void printAllFIO() {
+    public void printAllEmployeesFullNames() {
         for (int i = 0; i < employees.length; i++) {
-            System.out.println(i + 1 + ")" + employees[i].getFio());
+            System.out.println(i + 1 + ")" + employees[i].getFullName());
         }
     }
 
     public void changeSalary(int percent) {
         for (int i = 0; i < employees.length; i++) {
-            int newSalary = employees[i].getSalary() + (employees[i].getSalary()/100 * percent);
+            int newSalary = employees[i].getSalary() * (1 + percent/100);
             employees[i].setSalary(newSalary);
-            newSalary = 0;
         }
     }
     public void findDepartmentMinSalary(int department) {
-        int min = employees[1].getSalary();
+        int min = employees[0].getSalary();
         String fio = null;
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getDepartment() == department){
-                if (employees[i].getSalary() < min) {
+            if (employees[i].getDepartment() == department && employees[i].getSalary() < min){
                     min = employees[i].getSalary();
-                    fio = employees[i].getFio();
-                }
+                    fio = employees[i].getFullName();
             }
         }
         System.out.println("Сотрудник в отделе " + department  + " c минимальной зарплатой: " + fio + ". Salary: " + min);
     }
 
     public void findDepartmentMaxSalary(int department) {
-        int max = employees[1].getSalary();
+        int max = employees[0].getSalary();
         String fio = null;
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getDepartment() == department) {
-                if (employees[i].getSalary() > max) {
+            if (employees[i].getDepartment() == department && employees[i].getSalary() > max) {
                     max = employees[i].getSalary();
-                    fio = employees[i].getFio();
-                }
+                    fio = employees[i].getFullName();
             }
         }
         System.out.println("Сотрудник в отделе " + department  + " c максимальной зарплатой: " + fio + ". Salary: " + max);
     }
 
-    public int findDepartmentSalary(int department) {
+    public int findDepartmentTotalSalary(int department) {
         int sum = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getDepartment() == department) {
@@ -125,24 +121,23 @@ public class EmployeeBook {
     }
 
 
-    public void findDepartmentAverageSalary(int department) {
-        int sum = findDepartmentSalary(department);
-        int count = 0;
+    public double findDepartmentAverageSalary(int department) {
+        double sum = 0;
+        double count = 0;
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getDepartment() == department) {
+                sum += employees[i].getSalary();
                 count++;
             }
         }
-        int average = sum/count;
-        System.out.println("Average department salary: " + average);
+        return sum/count;
     }
 
     public void changeSalaryDepartment(int percent, int department) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getDepartment() == department) {
-                int newSalary = employees[i].getSalary() + (employees[i].getSalary() / 100 * percent);
+                int newSalary = employees[i].getSalary() * (1 + percent/100);
                 employees[i].setSalary(newSalary);
-                newSalary = 0;
             }
         }
     }
@@ -151,7 +146,7 @@ public class EmployeeBook {
         System.out.println("Сотрудники отдела " + department);
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getDepartment() == department) {
-                System.out.println(employees[i].getId() + ")" + employees[i].getFio() + " " + employees[i].getSalary());
+                System.out.println(employees[i].getId() + ")" + employees[i].getFullName() + " " + employees[i].getSalary());
             }
         }
     }
@@ -172,14 +167,33 @@ public class EmployeeBook {
         }
     }
 
-    public void changeEmployee(String fio, int salary, int department) {
+    public void changeEmployee(String fullName, int salary, int department) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getFio().equals(fio)) {
+            if (employees[i].getFullName().equals(fullName)) {
                 employees[i].setSalary(salary);
                 employees[i].setDepartment(department);
                 System.out.println(employees[i]);
             }
         }
+    }
+
+    public void printEmployeesFromDepartment() {
+        StringBuilder first = new StringBuilder();
+        StringBuilder second = new StringBuilder();
+        StringBuilder thirst = new StringBuilder();
+        for (int i = 0; i < employees.length; i++) {
+            switch (employees[i].getDepartment()) {
+                case 1:
+                    first.append(employees[i].getFullName() + "\n");
+                case 2:
+                    second.append(employees[i].getFullName() + "\n");
+                case 3:
+                    thirst.append(employees[i].getFullName() + "\n");
+            }
+        }
+        System.out.println("First department employees fullNames: " + first.toString());
+        System.out.println("Second department employees fullNames: " + second.toString());
+        System.out.println("Thirst department employees fullNames: " + thirst.toString());
     }
 
 }

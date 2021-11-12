@@ -2,18 +2,17 @@ package com.company;
 
 public class Employee {
 
-    private final String fio;
+    private final String fullName;
     private int department;
     private int salary;
-    private int id;
-    private static int counter = 1;
+    private final int id;
+    private static int counter = 0;
 
-    public Employee(String fio, int department, int salary) {
-        this.fio = fio;
+    public Employee(String fullName, int department, int salary) {
+        this.fullName = fullName;
         this.department = department;
         this.salary = salary;
-        id = counter;
-        counter++;
+        id = counter++;
     }
 
     public void setDepartment(int department) {
@@ -24,8 +23,8 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String getFio() {
-        return fio;
+    public String getFullName() {
+        return fullName;
     }
 
     public int getDepartment() {
@@ -41,7 +40,7 @@ public class Employee {
     }
 
     public String toString() {
-        return "FIO: " + fio + "\n"
+        return "FullName: " + fullName + "\n"
                 + "Department: " + department + "\n"
                 + "Salary: " + salary + "\n"
                 + "ID: " + id;
